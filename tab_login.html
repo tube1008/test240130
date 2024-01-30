@@ -59,6 +59,31 @@
             tab_title[1].parentElement.add('active')
         })
 
+        const Id = document.querySelector('#id');
+        const Pw = document.querySelector('#pw');
+        const error = document.querySelector('.error');
+        const login = document.querySelector('#login');
+        const userList = [{
+            id:'admin',
+            pw:'1234'
+        }]
+        console.log(Id, Pw, error, login);
+
+        console.log(Id.value)
+        console.log(Id.value == '')
+
+        login.addEventListener('click',()=>{
+            if(Id.value == ''){
+                error.innerHTML = '아이디를 입력해주세요'
+            }else if(Pw.value == ''){
+                error.innerHTML = '비밀번호를 입력해주세요'
+            }else if(Id.value == userList[0].id && Pw.value == userList[0].pw){
+                alert(`어서오세요 ${userList[0].id}님`)
+            }else{
+                error.innerHTML = '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.<br>입력하신 내용을 다시 확인해주세요.'
+                Pw.value = ''
+            }
+        })
     </script>
 </body>
 </html>
