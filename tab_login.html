@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭_로그인_시험</title>
+    <style>
+        .tab_title a {text-decoration: none; color:#000;}
+        .tab_contents .tab_c {height:500px;}
+        .tab_contents .tab_c1 {background:lightyellow;}
+        .tab_contents .tab_c2 {background:lightcyan;}
+        .tab_contents .tab_c1 .error {color:#f00;}
+        .active {color:#f00 !important;}
+    </style>
+</head>
+<body>
+    <main>
+        <div class="tab_title">
+            <a href="#" class="tab tab1">탭 제목1</a>
+            <a href="#" class="tab tab2">탭 제목2</a>
+        </div>
+        <div class="tab_contents">
+            <div class="tab_c tab_c1">
+                <h2>탭 내용 1</h2>
+                <form action="#">
+                    <input type="text" name="id" id="id" placeholder="아이디를 입력하세요">
+                    <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요">
+                    <p class="error"></p>
+                    <button type="button" id="login">로그인</button>
+                </form>
+            </div>
+            <div class="tab_c tab_c2">탭 내용2</div>
+        </div>
+    </main>
+    <script>
+        //시험 조건에 대한 답을 여기 작성하세요.
+
+        const tab_title = document.querySelectorAll('.tab_title > a')
+        const tab_c1 = document.querySelector('.tab_c1')
+        const tab_c2 = document.querySelector('.tab_c2')
+
+        console.log(tab_title, tab_c1, tab_c2)
+
+        tab_c2.style.display = 'none'
+
+        tab_title[0].parentElement.classList.add('active')
+
+        tab_title[0].addEventListener('click',()=>{
+            tab_c1.style.display = 'block'
+            tab_c2.style.display = 'none'
+            tab_title[0].parentElement.add('active')
+            tab_title[1].parentElement.remove('active')
+        })
+
+        tab_title[1].addEventListener('click',()=>{
+            tab_c1.style.display = 'none'
+            tab_c2.style.display = 'block'
+            tab_title[0].parentElement.remove('active')
+            tab_title[1].parentElement.add('active')
+        })
+
+        const Id = document.querySelector('#id');
+        const Pw = document.querySelector('#pw');
+        const error = document.querySelector('.error');
+        const login = document.querySelector('#login');
+        const userList = [{
+            id:'admin',
+            pw:'1234'
+        }]
+        console.log(Id, Pw, error, login);
+
+        console.log(Id.value)
+        console.log(Id.value == '')
+
+        login.addEventListener('click',()=>{
+            if(Id.value == ''){
+                error.innerHTML = '아이디를 입력해주세요'
+            }else if(Pw.value == ''){
+                error.innerHTML = '비밀번호를 입력해주세요'
+            }else if(Id.value == userList[0].id && Pw.value == userList[0].pw){
+                alert(`어서오세요 ${userList[0].id}님`)
+            }else{
+                error.innerHTML = '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.<br>입력하신 내용을 다시 확인해주세요.'
+                Pw.value = ''
+            }
+        })
+    </script>
+</body>
+</html>
